@@ -49,10 +49,7 @@ class ResponseParser(IResponseParser):
         ):
             raise ValueError("Unsupported result format")
 
-        if result["type"] == "plot":
-            return self.format_plot(result)
-        else:
-            return result["value"]
+        return result["value"]
 
     def format_plot(self, result: dict) -> Any:
         """
