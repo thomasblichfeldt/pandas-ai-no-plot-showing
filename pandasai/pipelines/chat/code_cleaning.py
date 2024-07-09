@@ -145,6 +145,9 @@ class CodeCleaning(BaseLogicUnit):
                 save_charts_path_str=f"{find_project_root()}/exports/charts",
             )
 
+        # If plt.show is in the code, remove that line
+        code_to_run = re.sub(r"plt.show\(\)", "", code_to_run)
+
         # Reset used skills
         context.skills_manager.used_skills = []
 
