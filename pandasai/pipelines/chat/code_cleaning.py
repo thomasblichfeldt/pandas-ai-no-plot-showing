@@ -145,9 +145,6 @@ class CodeCleaning(BaseLogicUnit):
                 save_charts_path_str=f"{find_project_root()}/exports/charts",
             )
 
-        # If plt.show is in the code, remove that line
-        code_to_run = re.sub(r"plt.show\(\)", "", code_to_run)
-
         # Reset used skills
         context.skills_manager.used_skills = []
 
@@ -469,6 +466,9 @@ Code running:
         self._additional_dependencies = []
 
         clean_code_lines = []
+
+        # If plt.show() is in the code, remove that as we do not want to display plots in the generated code
+        code_to_run = re.sub(r"plt.show\(\)", "", code_to_run)
 
         tree = ast.parse(code)
 
